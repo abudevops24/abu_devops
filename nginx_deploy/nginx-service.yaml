@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: my-nginx
   labels:
-        app: nginx
+    run: my-nginx
 spec:
   ports:
   - port: 80
-    targetPort: 80
+    protocol: TCP
   selector:
-    app: nginx
-  type: LoadBalancer
+    run: my-nginx
