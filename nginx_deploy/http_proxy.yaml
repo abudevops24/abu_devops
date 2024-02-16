@@ -5,13 +5,13 @@ metadata:
   namespace: test
 spec:
   rules:
-  - host: argocd.server-in.com
+  - host: test-argocd.server-in.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: nginx
+            name: nginx-1
             port:
               number: 80
