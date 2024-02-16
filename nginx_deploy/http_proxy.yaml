@@ -1,32 +1,17 @@
-kind: HTTPProxy # Http Proxy Pass
-apiVersion: projectcontour.io/v1 # Define projectcontour
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: argocd-server # Namespace we need to create the projectcontour
-  namespace: test # define Namespace
+  name: nginx-ingress
+  namespace: test
 spec:
-  routes:
-    - services:
-        - name: argocd-server
-          port: 80
-      loadBalancerPolicy:
-        strategy: WeightedLeastRequest
-      timeoutPolicy:
-        idle: infinity
-        response: infinity
-  virtualhost:
-    fqdn: argocd.server-in.com # Define the Domain Name and IP should pointed on projectcontour(IP)
-    corsPolicy:
-      allowCredentials: true 
-      allowOrigin:
-        - "*" # allows any origin
-      allowMethods:
-        - GET
-        - POST
-        - OPTIONS
-        - DELETE
-      allowHeaders:
-        - "*" # allows any origin
-      exposeHeaders:
-        - Content-Length
-        - Content-Range
-      maxAge: "10m" # preflight requests can be cached for 10 minutes.
+  rules:
+  - host: argocd.server-in.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              number: 80
