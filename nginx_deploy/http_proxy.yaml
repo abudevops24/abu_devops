@@ -1,0 +1,32 @@
+kind: HTTPProxy # Http Proxy Pass
+apiVersion: projectcontour.io/v1 # Define projectcontour
+metadata:
+  name: argocd-server # Namespace we need to create the projectcontour
+  namespace: test # define Namespace
+spec:
+  routes:
+    - services:
+        - name: argocd-server
+          port: 80
+      loadBalancerPolicy:
+        strategy: WeightedLeastRequest
+      timeoutPolicy:
+        idle: infinity
+        response: infinity
+  virtualhost:
+    fqdn: argocd.server-in.com # Define the Domain Name and IP should pointed on projectcontour(IP)
+    corsPolicy:
+      allowCredentials: true 
+      allowOrigin:
+        - "*" # allows any origin
+      allowMethods:
+        - GET
+        - POST
+        - OPTIONS
+        - DELETE
+      allowHeaders:
+        - "*" # allows any origin
+      exposeHeaders:
+        - Content-Length
+        - Content-Range
+      maxAge: "10m" # preflight requests can be cached for 10 minutes.
