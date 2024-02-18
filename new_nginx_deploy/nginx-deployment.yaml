@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: kube
-  replicas: 16 # tells deployment to run 2 pods matching the template
+  replicas: 6 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: kube
-        image: abudevops194/final-web
+        image: abudevops194/clinic-web
         ports:
         - containerPort: 8080
