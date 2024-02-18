@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
-  namespace: test
+  namespace: tesr
 spec:
   rules:
   - host: test-argocd.server-in.com
@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx
+            name: arego
             port:
               number: 80
