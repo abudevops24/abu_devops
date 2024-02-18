@@ -5,7 +5,7 @@ metadata:
   namespace: test
 spec:
   rules:
-  - host: test-argocd.server-in.com
+  - host: argocd.server-in.com
     http:
       paths:
       - path: /
