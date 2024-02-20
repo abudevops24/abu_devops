@@ -16,4 +16,4 @@ spec:
       - name: kube
         image: abudevops194/final-web
         ports:
-        - containerPort: 8080
+        - containerPort: 80
