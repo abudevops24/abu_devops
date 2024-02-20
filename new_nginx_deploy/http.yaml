@@ -5,7 +5,7 @@ metadata:
   namespace: test
 spec:
   routes:
-    - services: 
+    - services:
         - name: nginx_final_web
           port: 80
       loadBalancerPolicy:
@@ -18,15 +18,15 @@ spec:
     corsPolicy:
       allowCredentials: true
       allowOrigin:
-        - "*" # allows any origin
+        - "*"         # allows any origin
       allowMethods:
         - GET
         - POST
         - OPTIONS
         - DELETE
       allowHeaders:
-        - "*" # allows any origin
+        - "*"         # allows any origin
       exposeHeaders:
         - Content-Length
         - Content-Range
-      maxAge: "10m" # preflight requests can be cached for 10 minutes.
+      maxAge: "10m"    # preflight requests can be cached for 10 minutes.
