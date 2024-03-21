@@ -1,13 +1,14 @@
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: basic
 spec:
-  virtualhost:
-    fqdn: test-argocd.server-in.com
-  routes:
-    - conditions:
-      - prefix: /
-      services:
-        - name: s1
-          port: 80
+  rules:
+  - host: test-argocd.server-in.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: s1
+            port:
+              number: 80
