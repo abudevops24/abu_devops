@@ -1,32 +1,13 @@
-kind: HTTPProxy
 apiVersion: projectcontour.io/v1
+kind: HTTPProxy
 metadata:
-  name: solr
-  namespace: solr
+  name: basic
 spec:
-  routes:
-    - services:
-        - name: solr
-          port: 80
-      loadBalancerPolicy:
-        strategy: WeightedLeastRequest
-      timeoutPolicy:
-        idle: infinity
-        response: infinity
   virtualhost:
     fqdn: test-argocd.server-in.com
-    corsPolicy:
-      allowCredentials: true
-      allowOrigin:
-        - "*" # allows any origin
-      allowMethods:
-        - GET
-        - POST
-        - OPTIONS
-        - DELETE
-      allowHeaders:
-        - "*" # allows any origin
-      exposeHeaders:
-        - Content-Length
-        - Content-Range
-      maxAge: "10m" # preflight requests can be cached for 10 minutes.
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+        - name: s1
+          port: 80
